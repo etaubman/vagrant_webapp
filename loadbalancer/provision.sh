@@ -15,5 +15,5 @@ apt-get -y install haproxy
 sed -i '2s/.*/ENABLED=1/' /etc/default/haproxy
 mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy-original.cfg
 cp /vagrant_synced/haproxy.cfg /etc/haproxy/haproxy.cfg
-service haproxy start
 
+service haproxy restart

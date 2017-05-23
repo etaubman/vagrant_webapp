@@ -20,3 +20,5 @@ service mysql start
 mysql -uroot -padmin_password -e "CREATE USER 'remote_user'@'%' IDENTIFIED BY 'remote_password';"
 mysql -uroot -padmin_password -e "GRANT ALL PRIVILEGES ON *.* TO 'remote_user'@'%' WITH GRANT OPTION;"
 mysql -uroot -padmin_password -e "FLUSH PRIVILEGES;"
+
+service mysql restart

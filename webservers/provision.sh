@@ -15,12 +15,15 @@ echo -e "\n--- Installing Apache2 ---\n"
 sudo apt-get -y install apache2 > /dev/null 2>&1
 
 
+
 echo -e "\n--- Installing PHP5 ---\n"
-sudo apt-get -y install php5 libapache2-mod-php5 > /dev/null 2>&1
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get -y update
+sudo apt-get -y install php
+sudo apt-get -y install php-mcrypt php-mysql php-xml php-intl php-intl php-apcu php-uuid php-cgi php-cli php-gd php-ldap php-sqlite3 php-uploadprogress
+sudo apt-get -y install libapache2-mod-php7.0
+sudo apt-get -y install php-mbstring
 
-
-echo -e "\n--- Installing PHP packages ---\n"
-sudo apt-get -y install php5-cli php5-mcrypt php5-curl php5-common php5-json php5-gd php5-imagick php5-mysql php-apc > /dev/null 2>&1
 
 echo -e "\n--- Installing Git ---\n"
 sudo apt-get -y install git > /dev/null 2>&1
@@ -61,6 +64,12 @@ EOF
 
 rm -rf /var/www
 ln -s /vagrant_synced/src/www /var
+
+
+sed -i '12s/.*/DocumentRoot \/var\/www\/public/' /etc/apache2/sites-enabled/000-default.conf
+sed -i '166s/.*/AllowOverride All/' /etc/apache2/apache2.conf
+ln -s /vagrant_synced/src/www/app/webapp/public /var/www
+service apache2 restart
 
 
 echo -e "\n--- Installation done ! ---\n"
