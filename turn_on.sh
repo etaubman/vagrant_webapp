@@ -7,7 +7,7 @@ vagrant up
 cd ..
 
 cd ./contentserver
-vagrant up
+#vagrant up
 cd ..
 
 cd ./appserver
